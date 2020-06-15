@@ -1,5 +1,5 @@
 """
-Leetcode 283. Move Zeroes <Easy>
+283. Move Zeroes <Easy>
 https://leetcode.com/problems/move-zeroes/
 """
 from typing import List
@@ -46,9 +46,10 @@ class Solution:
         return nums
 
 solution = Solution()
-ans1 = solution.moveZeroes1([0,1,0,3,12])
-ans2 = solution.moveZeroes1([0,1,0,3,12])
-ans3 = solution.moveZeroes1([0,1,0,3,12])
+lst = [0,1,0,3,12]
+ans1 = solution.moveZeroes1(lst)
+ans2 = solution.moveZeroes1(lst)
+ans3 = solution.moveZeroes1(lst)
 
 print(ans1) # [1,3,12,0,0]
 print(ans2) # [1,3,12,0,0]

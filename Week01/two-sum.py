@@ -1,6 +1,6 @@
 """
-Leetcode 1. Two Sum <Easy>
-https://leetcode.com/problems/two-sum
+1. Two Sum <Easy>
+https://leetcode.com/problems/two-sum/
 """
 from typing import List
 
@@ -19,7 +19,7 @@ class Solution:
 
     def twoSum2(self, nums: List[int], target: int) -> List[int]:
         """
-        Solution #2: cache, 2 loops
+        Solution #2: cache, 2 iteration
         Time: O(n)
         Space: O(n)
         """
@@ -33,7 +33,7 @@ class Solution:
 
     def twoSum3(self, nums: List[int], target: int) -> List[int]:
         """
-        Solution #3: cache, 1 loop
+        Solution #3: cache, 1 iteration
         Time: O(n)
         Space: O(n)
         """
@@ -45,9 +45,11 @@ class Solution:
                 dic[target - n] = i
 
 solution = Solution()
-ans1 = solution.twoSum1([2, 7, 11, 15], 9)
-ans2 = solution.twoSum1([2, 7, 11, 15], 9)
-ans3 = solution.twoSum1([2, 7, 11, 15], 9)
+lst = [2, 7, 11, 15]
+target = 9
+ans1 = solution.twoSum1(lst, target)
+ans2 = solution.twoSum1(lst, target)
+ans3 = solution.twoSum1(lst, target)
 
 print(ans1) # [0, 1]
 print(ans2) # [0, 1]
