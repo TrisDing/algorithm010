@@ -15,7 +15,6 @@ class Solution:
             if elem == 0:
                 nums.append(0)
                 nums.remove(0)
-        return nums
 
     def moveZeroes2(self, nums: List[int]) -> None:
         """
@@ -28,7 +27,6 @@ class Solution:
             if nums[i] != 0:
                 nums[i], nums[next_zero_spot] = nums[next_zero_spot], nums[i]
                 next_zero_spot += 1
-        return nums
 
     def moveZeroes3(self, nums: List[int]) -> None:
         """
@@ -43,14 +41,17 @@ class Solution:
             elif snowBallSize > 0:
                 # swap the most left 0 with the element
                 nums[i], nums[i - snowBallSize] = nums[i - snowBallSize], nums[i]
-        return nums
 
 solution = Solution()
-lst = [0,1,0,3,12]
-ans1 = solution.moveZeroes1(lst)
-ans2 = solution.moveZeroes1(lst)
-ans3 = solution.moveZeroes1(lst)
 
-print(ans1) # [1,3,12,0,0]
-print(ans2) # [1,3,12,0,0]
-print(ans3) # [1,3,12,0,0]
+nums = [0,1,0,3,12]
+solution.moveZeroes1(nums)
+print(nums) # [1,3,12,0,0]
+
+nums = [0,0,0,0,1]
+solution.moveZeroes2(nums)
+print(nums) # [1, 0, 0, 0, 0]
+
+nums = [1,0,2,0,3,0]
+solution.moveZeroes3(nums)
+print(nums) # [1, 2, 3, 0, 0, 0]
