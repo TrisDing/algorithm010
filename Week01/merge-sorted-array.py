@@ -13,8 +13,7 @@ class Solution:
         """
         nums1_copy = nums1[:m]
         nums1[:] = []
-
-        p1, p2 = 0, 0
+        p1 = p2 = 0
         while p1 < m and p2 < n:
             if nums1_copy[p1] < nums2[p2]:
                 nums1.append(nums1_copy[p1])
@@ -22,7 +21,6 @@ class Solution:
             else:
                 nums1.append(nums2[p2])
                 p2 += 1
-
         # reminder
         if p1 < m: nums1[p1+p2:] = nums1_copy[p1:]
         if p2 < n: nums1[p1+p2:] = nums2[p2:]
@@ -34,7 +32,6 @@ class Solution:
         Space O(1)
         """
         p1, p2, p = m-1, n-1, len(nums1) - 1
-
         while p1 >= 0 and p2 >= 0:
             if nums1[p1] < nums2[p2]:
                 nums1[p] = nums2[p2]
@@ -43,7 +40,6 @@ class Solution:
                 nums1[p] = nums1[p1]
                 p1 -= 1
             p -= 1
-
         nums1[:p2+1] = nums2[:p2+1]
 
 solution = Solution()
@@ -53,7 +49,7 @@ nums2 = [2,5,6]
 solution.merge1(nums1, 3, nums2, 3)
 print(nums1) # [1, 2, 2, 3, 5, 6]
 
-nums1 = [1,2,3,0,0,0]
-nums2 = [2,5,6]
-solution.merge2(nums1, 3, nums2, 3)
-print(nums1) # [1, 2, 2, 3, 5, 6]
+nums1 = [1,2,3,4,0,0]
+nums2 = [3,4]
+solution.merge2(nums1, 4, nums2, 2)
+print(nums1) # [1, 2, 3, 3, 4, 4]

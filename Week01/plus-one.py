@@ -7,6 +7,7 @@ from typing import List
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         """
+        Solution #1
         Time: O(n)
         Space: O(1)
         """
@@ -23,5 +24,4 @@ class Solution:
 
 solution = Solution()
 ans = solution.plusOne([9,9,9])
-
 print(ans) # [1,0,0,0]
