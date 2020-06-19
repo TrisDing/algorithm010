@@ -1,10 +1,48 @@
 Learning Notes Week 02
 ======================
 
+Hash Table
+----------
+
+> A hash table is a data structure used to store keys, optionally, with corresponding values.
+
+- A mapping object maps hashable values to arbitrary objects. Mappings are mutable objects. The only standard mapping type in python is Dictionary.
+- A dictionary’s keys are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as keys.
+- Dictionaries can be created by placing a comma-separated list of key: value pairs within braces or by the dict() constructor.
+- A set is an unordered collection with no duplicate elements. Curly braces or the set() function can be used to create sets. (empty set must use set())
+
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | N/A             |
+| Search     | O(1)            |
+| Insertion  | O(1)            |
+| Deletion   | O(1)            |
+
+Dictionary Operations
+```py
+d[key]                 # Return the item of d with key key. Raises a KeyError if key is not in the map.
+d[key] = value         # Set d[key] to value.
+del d[key]             # Remove d[key] from d. Raises a KeyError if key is not in the map.
+key in d               # Return True if d has a key key, else False.
+key not in d           # Equivalent to not key in d.
+d.clear()              # Remove all items from the dictionary.
+d.get(key[, default])  # Return the value for key if key is in the dictionary, else default.
+d.items()              # Return a new view of the dictionary’s items ((key, value) pairs).
+d.keys()               # Return a new view of the dictionary’s keys.
+d.values()             # Return a new view of the dictionary’s values.
+```
+
 Binary Trees
 ------------
 
-> A binary tree is either empty, or a root node r together with a left binary tree and a right binary tree.
+> A binary tree is either empty, or a root node together with a left binary tree and a right binary tree.
+
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(log(n))       |
+| Search     | O(log(n))       |
+| Insertion  | O(log(n))       |
+| Deletion   | O(log(n))       |
 
 ```
                          Height  Depth  Level
@@ -46,7 +84,7 @@ Complete Binary Tree
  /
 H
 
-[_,A,B,C,D,E,F,G,H]
+[A,B,C,D,E,F,G,H]
 ```
 
 A complete binary tree has `2^k` nodes at every depth `k < n` and between `2^n` and `2^n+1 - 1` nodes altogether. It can be efficiently implemented as an array, where a node at index `i` has children at indexes `2i` and `2i+1` and a parent at index `i/2`, with 1-based indexing.
@@ -62,9 +100,6 @@ Below are **NOT** Complete Binary Trees
 F   G   H              H       I         H   I   J   K   L   M   N   O
 ```
 
-Binary Tree Traversal
----------------------
-
 BinaryTree Node
 ```py
 class BinaryTreeNode:
@@ -74,23 +109,24 @@ class BinaryTreeNode:
         self.right = right
 ```
 
+Binary Tree Traversal
 
 DFS Pre-order Traversal: `root -> left -> right`
 ```py
 def preorder(self, root):
     if root:
-        self.visit(root.val)
-        self.preorder(left)
-        self.preorder(right)
+        visit(root)
+        preorder(left)
+        preorder(right)
 ```
 
 DFS In-order Traversal: `left -> root -> right`
 ```py
 def inorder(self, root):
     if root:
-        self.inorder(left)
-        self.visit(root.val)
-        self.inorder(right)
+        inorder(left)
+        visit(root)
+        inorder(right)
 ```
 
 DFS Post-order Traversal:  `left -> right -> root`
@@ -99,19 +135,72 @@ def postorder(self, root):
     if root:
         self.postorder(left)
         self.postorder(right)
-        self.visit(root.val)
+        self.visit(root)
 ```
 
 BFS Level Order Traversal: `top -> bottom, left -> right`
 ```py
+def levelOrder(root):
+    if root:
+        self.visit(root)
+        if node.left:
+            levelOrder(root.left)
+        if node.right:
+
+
 def levelorder(root):
     queue = collections.deque()
     queue.append(root)
     while queue:
         node = queue.popleft()
-        visit(node)
+        self.visit(node)
         if node.left:
             queue.append(node.left)
         if node.right:
             queue.append(node.right)
+```
+
+Heap
+----
+
+> A heap is a complete binary tree, and is represent by array. The children of the node at index i are at indices 2i + 1 and 2i + 2.
+
+Given element in a heap at position `i`:
+- parent position: `(i-1) >> 1`
+- left child position: `2*i + 1`
+- right child position: `2*i + 2`
+
+max-heap: the key at each node is at least as great as the keys at it's children.
+```
+           _____561_____
+          /             \
+     ___314_           _401_
+    /       \         /     \
+  _28       156     359     271
+ /   \
+11    3
+```
+
+min-heap: the key at each node is at least as small as the keys at it's children.
+```py
+              _____3____
+             /          \
+       _____11_         _28_
+      /        \       /    \
+   _156_       314   561    401
+  /     \
+359     271
+```
+
+collections.heapq
+```py
+heap = []            # creates an empty heap
+heap[0]              # smallest element on the heap without popping it
+heapq.heapify(L)     # transforms list into a heap, in-place, in linear time
+heapq.heappush(h, e) # pushes a new element on the heap
+heapq.heappop(h)     # pops the smallest item from the heap
+heapq.heappushpop(h, a) # pushes a on the heap and then pops and returns the smallest element
+heapq.heapreplace(h, e) # pops and returns smallest item, and adds new item; the heap size is unchanged
+heapq.nlargest(L)    # Find the n largest elements in a dataset. Same as sorted(iterable, key=key, reverse=True)[:n]
+heapq.nsmallest(L)   # Find the n smallest elements in a dataset. Same as sorted(iterable, key=key)[:n]
 ```

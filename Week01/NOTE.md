@@ -4,16 +4,18 @@ Learning Notes Week 01
 Array
 -----
 
-Basic Concepts
+> Array is a contiguous block of memory. It is usually used to represent sequences.
+
 - Arrays are lists, lists are mutable sequences, tuples are immutable sequences
-- list is dynamically-resized, there is no upper bound
+- Lists are dynamically-resized, there is no upper bound
 - Values can be deleted and inserted at arbitrary locations
 
-Time Complexity of array operations
-- Retrieving  O(1)
-- Updating    O(1)
-- Insertion   O(n)
-- Deletion    O(n-i)
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(1)            |
+| Search     | O(1)            |
+| Insertion  | O(n)            |
+| Deletion   | O(n)            |
 
 Common Sequence Operations (list, tuple, range, etc.)
 ```py
@@ -107,6 +109,13 @@ Doubly linked list: `L -> x <- 2 <-> 3 <-> 5 <-> 4 -> x`
 - 4's prev is 3   , 5's next is 4
 - 4's prev is 5   , 4's next is None
 
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(n)            |
+| Search     | O(n)            |
+| Insertion  | O(1)            |
+| Deletion   | O(1)            |
+
 LinkedList Node
 ```py
 class ListNode:
@@ -117,7 +126,7 @@ class ListNode:
 
 Coding Techniques
 ```py
-# Linked List iteration framework
+# Linked List iteration framework (Double Pointers)
 prev, curr = None, head
 while curr:
     # do something with prev and curr
@@ -141,7 +150,7 @@ def reverseList(self, head: ListNode) -> ListNode:
         curr = cnext
     return prev
 
-# Linked List recursion framework
+# Linked List recursion framework (Think Backwards)
 def reverseList(self, head: ListNode) -> ListNode:
     if not head or not head.next:   # end condition
         return head
@@ -154,17 +163,23 @@ def reverseList(self, head: ListNode) -> ListNode:
 Stacks and Queues
 -----------------
 
-- Stack: First In Last Out (FILO)
-- Queue: First In First Out (FIFO)
+> Stacks support first-in, last-out (FILO) for inserts and deletes, whereas queues are first-in first-out (FIFO)
 
-Stack Operations (Stack uses the build-in list-type)
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(n)            |
+| Search     | O(n)            |
+| Insertion  | O(1)            |
+| Deletion   | O(1)            |
+
+Stack Operations (List data types represent the implementation of stacks)
 ```py
 stack.append(x)  # push
 stack.pop()      # pop
 stack[-1]        # peek
 ```
 
-Queue Operations (Queue uses the collection.deque class)
+Queue Operations (collection.deque - class represent the implementation of double ended queues)
 ```py
 q.append(x)      # add x to the right side of the deque
 q.appendleft(x)  # add x to the left side of the deque
