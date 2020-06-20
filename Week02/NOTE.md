@@ -140,14 +140,6 @@ def postorder(self, root):
 
 BFS Level Order Traversal: `top -> bottom, left -> right`
 ```py
-def levelOrder(root):
-    if root:
-        self.visit(root)
-        if node.left:
-            levelOrder(root.left)
-        if node.right:
-
-
 def levelorder(root):
     queue = collections.deque()
     queue.append(root)
@@ -170,6 +162,14 @@ Given element in a heap at position `i`:
 - left child position: `2*i + 1`
 - right child position: `2*i + 2`
 
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| find-min   | O(1)            |
+| delete-min | O(logn)         |
+| Insert     | O(logn)         |
+| K largest  | O(nlogK)        |
+| K smallest | O(nlogK)        |
+
 max-heap: the key at each node is at least as great as the keys at it's children.
 ```
            _____561_____
@@ -182,7 +182,7 @@ max-heap: the key at each node is at least as great as the keys at it's children
 ```
 
 min-heap: the key at each node is at least as small as the keys at it's children.
-```py
+```
               _____3____
              /          \
        _____11_         _28_
@@ -192,15 +192,15 @@ min-heap: the key at each node is at least as small as the keys at it's children
 359     271
 ```
 
-collections.heapq
+**heapq** Operations
 ```py
-heap = []            # creates an empty heap
-heap[0]              # smallest element on the heap without popping it
-heapq.heapify(L)     # transforms list into a heap, in-place, in linear time
-heapq.heappush(h, e) # pushes a new element on the heap
-heapq.heappop(h)     # pops the smallest item from the heap
+heap = []               # creates an empty heap
+heap[0]                 # smallest element on the heap without popping it
+heapq.heapify(L)        # transforms list into a heap, in-place, in linear time
+heapq.heappush(h, e)    # pushes a new element on the heap
+heapq.heappop(h)        # pops the smallest item from the heap
 heapq.heappushpop(h, a) # pushes a on the heap and then pops and returns the smallest element
 heapq.heapreplace(h, e) # pops and returns smallest item, and adds new item; the heap size is unchanged
-heapq.nlargest(L)    # Find the n largest elements in a dataset. Same as sorted(iterable, key=key, reverse=True)[:n]
-heapq.nsmallest(L)   # Find the n smallest elements in a dataset. Same as sorted(iterable, key=key)[:n]
+heapq.nlargest(n, L)    # Find the n largest elements in a dataset.
+heapq.nsmallest(n, L)   # Find the n smallest elements in a dataset.
 ```
