@@ -4,7 +4,7 @@ My Implementation of Heap
 class BinaryHeap:
     def __init__(self, capacity = 10):
         self.heapsize = 0
-        self.heap = [-1] * (capacity + 1)
+        self.heap = [-1] * capacity
 
     def is_empty(self):
         return self.heapsize == 0
@@ -19,56 +19,68 @@ class BinaryHeap:
         """
         if self.is_full():
             raise Exception("Heap is full, No space to insert new element")
-        self.heap[self.heapsize] = elem # 1. append new element to the end of heap.
-        self.heapsize += 1              # 2. heap size + 1.
+        # 1. append new element to the end of heap.
+        self.heap[self.heapsize] = elem
+        # 2. increase the heapsize by 1.
+        self.heapsize += 1
+        # 3. bubble up the larger child until hitting root.
         endpos = self.heapsize - 1
-        self._siftup(endpos)            # 3. bubble up the larger child until hitting root.
+        self._siftup(endpos)
 
     def _siftup(self, i):
         """
         Maintains the heap property while inserting an element at position i
         """
-        newitem = self.heap[i]
         while i > 0:
-            parentpos = (i - 1) >> 1 # parent position
+            newitem = self.heap[i]
+            parentpos = (i - 1) >> 1
             parent = self.heap[parentpos]
             if newitem > parent:
-                self.heap[i] = parent # Move the larger child up.
+                # newitem is bigger, move it up.
+                newitem, parent = parent, newitem
+                # process the next element (parentpos).
                 i = parentpos
                 continue
+            # parent is bigger, we are done.
             break
-        self.heap[i] = newitem
 
     def delete(self, i):
         """
-        Remove an element at position i
+        Remove an element at position i from the heap
+        Time Complexity: O(log N)
         """
         if self.is_empty():
             raise Exception("Heap is empty, No element to delete")
         delitem = self.heap[i]
         endpos = self.heapsize - 1
-        self.heap[i] = self.heap[endpos] # 1. replace the element at position i with the last element.
-        self.heapsize -= 1               # 2. heap size - 1
-        self._siftdown(i)                # 3. move down the new element until the end of heap.
+        # 1. replace the element at position i with the last element.
+        self.heap[i] = self.heap[endpos]
+        # 2. decrease heapsize by 1 (so the last item is removed).
+        self.heapsize -= 1
+         # 3. move down the new element until the end of heap.
+        self._siftdown(i)
         return delitem
 
     def _siftdown(self, i):
         """
         Maintains the heap property while deleting an element.
         """
-        target = self.heap[i]
-        endpos = self.heapsize
-        childpos = 2 * i + 1 # leftmost child position
-        while childpos < endpos:
-            rightpos = childpos + 1
-            if rightpos < endpos and self.heap[rightpos] > self.heap[childpos]:
+        leftpos = 2 * i + 1
+        while leftpos < self.heapsize:
+            delitem = self.heap[i]
+            # select the bigger one from leftchild and rightchild.
+            childpos = leftpos
+            rightpos = leftpos + 1
+            if rightpos < self.heapsize and self.heap[rightpos] > self.heap[leftpos]:
                 childpos = rightpos
-            if target >= self.heap[childpos]:
+            # delitem is bigger than child, we are done.
+            if delitem >= self.heap[childpos]:
                 break
-            self.heap[i] = self.heap[childpos] # Move the smaller child down.
+            # delitem is smaller, move it down.
+            self.heap[i], self.heap[childpos] = self.heap[childpos], self.heap[i]
+            # process the next element (childpos).
             i = childpos
-            childpos = 2 * i + 1
-        self.heap[i] = target
+            leftpos = 2 * i + 1
 
     def find_max(self):
         if self.is_empty():
@@ -100,7 +112,6 @@ max_heap.insert(3)
 max_heap.printheap()
 max_heap.delete(5)
 max_heap.printheap()
-print(max_heap.find_max())
 max_heap.delete(0)
 max_heap.printheap()
-print(max_heap.find_max())
+print("heapmax = ", max_heap.find_max())

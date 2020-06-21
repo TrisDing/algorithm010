@@ -80,6 +80,12 @@ vec = [-4, -2, 0, 2, 4]
 vec = [[1,2,3], [4,5,6], [7,8,9]]
 [num for elem in vec for num in elem]
 
+# Get sliding windows of size k in an array of nums
+nums, k = [1,2,3,4,5,6], 3
+n = len(nums)
+windows = [nums[i:i+k] for i in range(n-k+1)]
+print(windows) # [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]]
+
 # Rotate array by k times (right shift)
 nums = [1,2,3,4,5,6,7]
 n = len(nums)
