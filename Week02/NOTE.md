@@ -204,3 +204,46 @@ heapq.heapreplace(h, e) # pops and returns smallest item, and adds new item; the
 heapq.nlargest(n, L)    # Find the n largest elements in a dataset.
 heapq.nsmallest(n, L)   # Find the n smallest elements in a dataset.
 ```
+
+Graph
+-----
+
+> A graph is a finite set of vertices and connected by a set of edges.
+
+```
+(1:M)---(0:E)
+  |  \    |
+  |   \   |
+  |    \  |
+(2:B)---(3:L)
+   \
+    \
+   (4:P)
+```
+
+Types of graphs:
+- Undirected Graph: nodes are connected by edges that are all bidirectional.
+- Directed: nodes are connected by directed edges – they only go in one direction.
+
+Graph Adjacency List Representation
+- The size of the array is equal to the number of nodes.
+- A single index, array[i] represents the list of nodes adjacent to the ith node.
+```
+0 -> 1 -> 3#
+1 -> 0 -> 2 -> 3#
+2 -> 1 -> 3 -> 4#
+3 -> 0 -> 1 -> 2#
+4 -> 2#
+```
+
+Graph Adjacency Matrix Representation
+- An Adjacency Matrix is a 2D array of size V x V where V is the number of nodes in a graph.
+- A slot matrix[i][j] = 1 indicates that there is an edge from node i to node j.
+
+|       | 0 | 1 | 2 | 3 | 4 |
+|-------|---|---|---|---|---|
+| **0** | 0 | 1 | 0 | 1 | 0 |
+| **1** | 1 | 0 | 1 | 1 | 0 |
+| **2** | 0 | 1 | 0 | 1 | 1 |
+| **3** | 1 | 1 | 1 | 0 | 0 |
+| **4** | 0 | 0 | 1 | 0 | 0 |

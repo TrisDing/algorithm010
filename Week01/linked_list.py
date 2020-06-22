@@ -1,7 +1,6 @@
 """
 Singly Linked List Data Structure
 """
-
 class ListNode:
     """
     Linked List Node

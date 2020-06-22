@@ -1,5 +1,5 @@
 """
-My Implementation of Heap
+My Implementation of Max Heap
 """
 class BinaryHeap:
     def __init__(self, capacity = 10):
@@ -83,6 +83,10 @@ class BinaryHeap:
             leftpos = 2 * i + 1
 
     def find_max(self):
+        """
+        Return the Max Element (Heap Top)
+        Time Complexity: O(1)
+        """
         if self.is_empty():
             raise Exception("Heap is empty.")
         return self.heap[0]
