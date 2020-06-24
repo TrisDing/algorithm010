@@ -4,11 +4,11 @@ Learning Notes Week 02
 Hash Table
 ----------
 
-> A hash table is a data structure used to store keys, optionally, with corresponding values.
+> A hash table is a data structure used to store vals, optionally, with corresponding values.
 
 - A mapping object maps hashable values to arbitrary objects. Mappings are mutable objects. The only standard mapping type in python is Dictionary.
-- A dictionary’s keys are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as keys.
-- Dictionaries can be created by placing a comma-separated list of key: value pairs within braces or by the dict() constructor.
+- A dictionary’s vals are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as vals.
+- Dictionaries can be created by placing a comma-separated list of val: value pairs within braces or by the dict() constructor.
 - A set is an unordered collection with no duplicate elements. Curly braces or the set() function can be used to create sets. (empty set must use set())
 
 | Operation  | Time Complexity |
@@ -20,15 +20,15 @@ Hash Table
 
 Dictionary Operations
 ```py
-d[key]                 # Return the item of d with key key. Raises a KeyError if key is not in the map.
-d[key] = value         # Set d[key] to value.
-del d[key]             # Remove d[key] from d. Raises a KeyError if key is not in the map.
-key in d               # Return True if d has a key key, else False.
-key not in d           # Equivalent to not key in d.
+d[val]                 # Return the item of d with val val. Raises a valError if val is not in the map.
+d[val] = value         # Set d[val] to value.
+del d[val]             # Remove d[val] from d. Raises a valError if val is not in the map.
+val in d               # Return True if d has a val val, else False.
+val not in d           # Equivalent to not val in d.
 d.clear()              # Remove all items from the dictionary.
-d.get(key[, default])  # Return the value for key if key is in the dictionary, else default.
-d.items()              # Return a new view of the dictionary’s items ((key, value) pairs).
-d.keys()               # Return a new view of the dictionary’s keys.
+d.get(val[, default])  # Return the value for val if val is in the dictionary, else default.
+d.items()              # Return a new view of the dictionary’s items ((val, value) pairs).
+d.vals()               # Return a new view of the dictionary’s vals.
 d.values()             # Return a new view of the dictionary’s values.
 ```
 
@@ -36,13 +36,6 @@ Binary Trees
 ------------
 
 > A binary tree is either empty, or a root node together with a left binary tree and a right binary tree.
-
-| Operation  | Time Complexity |
-| ---------- | :-------------: |
-| Access     | O(log(n))       |
-| Search     | O(log(n))       |
-| Insertion  | O(log(n))       |
-| Deletion   | O(log(n))       |
 
 ```
                          Height  Depth  Level
@@ -75,6 +68,9 @@ Perfect Binary Tree
 Complete Binary Tree
 > A binary tree in which every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible.
 
+- A complete binary tree has `2^k` nodes at every depth `k < n` and between `2^n` and `2^n+1 - 1` nodes altogether.
+- It can be efficiently implemented as an array, where a node at index `i` has children at indexes `2i` and `2i+1` and a parent at index `i/2`, with 1-based indexing.
+
 ```
       __A__
      /     \
@@ -84,10 +80,8 @@ Complete Binary Tree
  /
 H
 
-[A,B,C,D,E,F,G,H]
+[_,A,B,C,D,E,F,G,H]
 ```
-
-A complete binary tree has `2^k` nodes at every depth `k < n` and between `2^n` and `2^n+1 - 1` nodes altogether. It can be efficiently implemented as an array, where a node at index `i` has children at indexes `2i` and `2i+1` and a parent at index `i/2`, with 1-based indexing.
 
 Below are **NOT** Complete Binary Trees
 ```
@@ -152,6 +146,109 @@ def levelorder(root):
             queue.append(node.right)
 ```
 
+Binary Search Tree (BST)
+
+> A BST is a rooted binary tree whose internal nodes each store a val greater than all the vals in the node's left subtree and less than those in its right subtree.
+
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(log(n))       |
+| Search     | O(log(n))       |
+| Insertion  | O(log(n))       |
+| Deletion   | O(log(n))       |
+
+BST Operations
+
+Search
+```py
+def search(root, val):
+    if root is None:
+        return None
+    if val < root.val:
+        return search(root.left, val)
+    elif val > root.val:
+        return search(root.right, val)
+    return root
+```
+
+Insert
+```
+     100                        100
+    /   \      Insert(40)      /   \
+  20    500    --------->     20   500
+ /  \                        /  \
+10   30                     10   30
+                                  \
+                                   40
+```
+
+```py
+def insert(root, val):
+    if root is None:
+        return BinaryTreeNode(val)
+    if val < root.val:
+        root.left = insert(root.left, val)
+    elif val > root.val:
+        root.right = insert(node.right, val)
+    return root
+```
+
+Delete
+```
+1) Node to be deleted is leaf: Simply remove from the tree.
+       50                            50
+    /     \         Delete(20)      /   \
+   30      70       --------->    30     70
+  /  \    /  \                     \    /  \
+20   40  60   80                   40  60   80
+
+2) Node to be deleted has only one child: Copy the child to the node and delete the child.
+        50                           50
+     /     \        Delete(30)      /   \
+    30      70      --------->    40     70
+      \    /  \                         /  \
+      40  60   80                      60   80
+
+3) Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor.
+        50                           60
+     /     \        Delete(50)      /   \
+    40      70      --------->    40    70
+           /  \                           \
+          60   80                          80
+```
+
+```py
+def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+    if root is None:
+        return None
+    if key < root.val:
+        root.left = self.deleteNode(root.left, key)
+    elif key > root.val:
+        root.right = self.deleteNode(root.right, key)
+    else:
+        if root.left is None:
+            # has only right child
+            child = root.right
+            root = None
+            return child
+        elif root.right is None:
+            # has only left child
+            child = root.left
+            root = None
+            return child
+        # has two children
+        child = self.minChild(root.right)
+        root.val = child.val
+        root.right = self.deleteNode(root.right , child.val)
+    return root
+
+def minChild(self, node: TreeNode) -> TreeNode:
+    curr = node
+    while curr.left is not None:
+        curr = curr.left
+    return curr
+```
+
 Heap
 ----
 
@@ -170,7 +267,7 @@ Given element in a heap at position `i`:
 | K largest  | O(nlogK)        |
 | K smallest | O(nlogK)        |
 
-max-heap: the key at each node is at least as great as the keys at it's children.
+max-heap: the val at each node is at least as great as the vals at it's children.
 ```
            _____561_____
           /             \
@@ -181,7 +278,7 @@ max-heap: the key at each node is at least as great as the keys at it's children
 11    3
 ```
 
-min-heap: the key at each node is at least as small as the keys at it's children.
+min-heap: the val at each node is at least as small as the vals at it's children.
 ```
               _____3____
              /          \

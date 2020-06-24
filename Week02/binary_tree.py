@@ -1,22 +1,6 @@
 """
-Tree Data Structure
+Binary Tree Data Structure
 """
-class TreeNode:
-    def __init__(self, val=None, children=None):
-        self.val = val
-        self.children = children
-
-def simple_tree():
-    """ Create a simple tree
-
-              ___1___
-             /   |   \
-          __3__  2    4
-         /     \
-        5       6
-    """
-    return TreeNode(1, [TreeNode(3, [TreeNode(5), TreeNode(6)]), TreeNode(2), TreeNode(4)])
-
 class BinaryTreeNode:
     def __init__(self, val=None, left=None, right=None):
         self.val = val

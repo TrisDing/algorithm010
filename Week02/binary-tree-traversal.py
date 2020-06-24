@@ -12,7 +12,7 @@ https://leetcode.com/problems/binary-tree-postorder-traversal/
 https://leetcode.com/problems/binary-tree-level-order-traversal/
 """
 from typing import List
-from tree import BinaryTreeNode, create_binary_tree, print_binary_tree
+from binary_tree import BinaryTreeNode, create_binary_tree, print_binary_tree
 from collections import deque
 
 class Solution:

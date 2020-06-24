@@ -9,8 +9,12 @@ https://leetcode.com/problems/n-ary-tree-postorder-traversal/
 https://leetcode.com/problems/n-ary-tree-level-order-traversal/
 """
 from typing import List
-from tree import TreeNode, simple_tree
 from collections import deque
+
+class TreeNode:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
 
 class Solution:
     def preorder1(self, root: TreeNode) -> List[int]:
@@ -116,7 +120,14 @@ class Solution:
             res.append(level)
         return res
 
-t = simple_tree()
+t = TreeNode(1, [TreeNode(3, [TreeNode(5), TreeNode(6)]), TreeNode(2), TreeNode(4)])
+"""
+      ___1___
+     /   |   \
+  __3__  2    4
+ /     \
+5       6
+"""
 
 solution = Solution()
 ans = solution.preorder1(t)
