@@ -13,7 +13,7 @@ def recursion(level, param1, param2, ...):
 	   return
 
     # process logic in current level
-    process(level, data...)
+    process(level, data, ...)
 
     # drill down
     recursion(level + 1, p1, ...)
@@ -37,13 +37,16 @@ def divide_conquer(problem, param1, param2, ...):
   subresult1 = self.divide_conquer(subproblems[0], p1, ...)
   subresult2 = self.divide_conquer(subproblems[1], p1, ...)
   subresult3 = self.divide_conquer(subproblems[2], p1, ...)
-  …
+  ...
 
   # process and generate the final result
-  result = process_result(subresult1, subresult2, subresult3, …)
+  result = process_result(subresult1, subresult2, subresult3, ...)
 
   # revert the current level states
 ```
+
+- Sometimes we need to return multiple results (tuple)
+- Sometimes we need global variables to easily update the final result
 
 Backtrack Template
 ```py
@@ -56,11 +59,12 @@ def backtrack(path = [], choices):
     for choice in choices:
         if exclusive condition: # get rid of the illegal choices
             continue
-        path.append() # Make the choice
+        path.append(choice) # Make the choice
         backtrack(path, choices) # enter the next decision tree
-        path.pop() # Remove the choice (since the choice it's already made)
+        path.pop() # Remove the choice (since it's already made)
 ```
 
-- Time complexity: O(N * 2^N)
-- Space complexity: O(N)
-- Backtrack is a decision tree, updating the result is actually a preorder recursion
+- Time complexity for backtrack algorithm is at least O(N!)
+- Backtrack is a decision tree, updating the result is actually a preorder and/or postorder recursion
+- Sometimes we don't need to explicitly maintain the choice list, we derive it using other parameters (e.g. index)
+- Sometimes path can be a string instead of an array, and we use `path += 'choice'` and `path = path[:-1]` to make and remove choice
