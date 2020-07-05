@@ -119,16 +119,16 @@ class Solution:
         """
         Solution #1: Recursively
         """
-        def traverse(node, level):
+        def traverse(root, level):
             if not root:
                 return
             if len(res) == level:
                 res.append([])
-            res[level].append(node.val)
-            if node.left:
-                traverse(node.left, level+1)
-            if node.right:
-                traverse(node.right, level+1)
+            res[level].append(root.val)
+            if root.left:
+                traverse(root.left, level+1)
+            if root.right:
+                traverse(root.right, level+1)
 
         res = []
         traverse(root, 0)
