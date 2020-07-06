@@ -60,7 +60,7 @@ def island(self, grid: List[List[int]]):
         return 0 <= r < m and 0 <= c < n
 ```
 
-Backtrack
+Backtrack (see Week03 NOTE)
 ```py
 result = []
 
@@ -164,6 +164,10 @@ def bfs(start, target): # any two nodes, doesn't have to start from the root
 Binary Search
 -------------
 
+- Monotonically increasing/decreasing
+- Bounded (have upper and lower bound)
+- Index accessible
+
 [left, right]
 ```py
 def binary_search(nums, target)
@@ -221,6 +225,7 @@ def right_bound(nums, target):
 }
 ```
 
+Target Function g(m)
 ```py
 def binary_search(l, r):
     """

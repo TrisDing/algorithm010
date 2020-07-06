@@ -123,28 +123,3 @@ print(DFS1(tree))
 print(DFS2(tree))
 print(BFS1(tree))
 print(BFS2(tree))
-
-def ShortestPathDFS(root, target):
-    if not root:
-        return -1
-    step = 0
-    visited = set()
-    stack = [root]
-    while stack:
-        node = stack.pop()
-        if node in visited:
-            continue
-        if node is target:
-            return step
-        if node.children:
-            for child in node.children:
-                if child not in visited:
-                    stack.append(child)
-                    visited.add(child)
-        step += 1
-    return step
-
-target = TreeNode(6)
-tree = TreeNode(1, [TreeNode(3, [TreeNode(5), target]), TreeNode(2), TreeNode(4)])
-print(ShortestPathDFS(tree, target))
-print(ShortestPathBFS(tree, target))
