@@ -61,23 +61,12 @@ def island(self, grid: List[List[int]]):
 ```
 
 Backtrack (see Week03 NOTE)
-```py
-result = []
 
-def backtrack(path = [], choices):
-    if end condition:
-        result.add(path[:]) # have to make a new copy
-        return
-
-    for choice in choices:
-        # get rid of the illegal choices
-        if exclusive condition:
-            continue
-
-        path.append(choice) # Make the choice
-        backtrack(path, choices) # enter the next decision tree
-        path.pop() # Remove the choice (since it's already made)
-```
+Leetcode Problems
+- [200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
+- [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)
+- [463. Island Perimeter](https://leetcode.com/problems/island-perimeter/)
+- [827. Making A Large Island](https://leetcode.com/problems/making-a-large-island/)
 
 BFS Template
 ------------
@@ -161,6 +150,20 @@ def bfs(start, target): # any two nodes, doesn't have to start from the root
     return 0
 ```
 
+Leetcode Problems
+- [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+- [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+- [752. Open the Lock](https://leetcode.com/problems/open-the-lock/)
+- [127. Word Ladder](https://leetcode.com/problems/word-ladder/)
+- [126. Word Ladder II](https://leetcode.com/problems/word-ladder-ii/)
+- [433. Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/)
+- [515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
+- [529. Minesweeper](https://leetcode.com/problems/minesweeper/)
+
+Greedy Algorithm
+----------------
+[TODO]
+
 Binary Search
 -------------
 
@@ -173,7 +176,7 @@ Binary Search
 def binary_search(nums, target)
     left, right = 0, len(nums) - 1
     while left <= right:
-        mid = left + (right - left) // 2
+        mid = (left + right) // 2
         if nums[mid] < target:
             left = mid + 1
         elif nums[mid] > target:
@@ -188,7 +191,7 @@ def binary_search(nums, target)
 def left_bound(nums, target):
     left, right = 0, len(nums) - 1
     while left < right:
-        mid = left + (right - left) // 2
+        mid = (left + right) // 2
         if nums[mid] < target:
             left = mid + 1
         elif nums[mid] > target:
@@ -229,32 +232,27 @@ Target Function g(m)
 ```py
 def binary_search(l, r):
     """
-    Returns the smallest number m in range [l, r) such that g(m) is true.
-    Returns r if not found.
+    Returns the smallest number m in range [l, r] such that g(m) is true.
+    Returns r+1 if not found.
 
     Time Complexity: O(log(r - l) * (f(m) + g(m)))
     Space Complexity: O(1)
     """
-    while l < r:
+    while l <= r:
         m = l + (r - l) // 2
         if f(m): # optional: if somehow we can determine m is the answer, return it
             return m
         if g(m):
-            r = m     # new range [l, m)
-        else:
-            l = m + 1 # new range [m+1, r)
-    return l # or not found
-
-def binary_search(l, r):
-    """
-    Returns the smallest number m in range [l, r] such that g(m) is true.
-    Returns r+1 if not found.
-    """
-    while l <= r:
-        m = l + (r - l) // 2
-        if g(m):
             r = m - 1  # new range [l, m-1]
         else:
             l = m + 1  # new range [m+1, r]
-    return l
+    return l # or not found
 ```
+
+Leetcode Problems
+- [704. Binary Search](https://leetcode.com/problems/binary-search/)
+- [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+- [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+- [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+- [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+- [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)

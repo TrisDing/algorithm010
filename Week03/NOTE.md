@@ -49,6 +49,11 @@ def divide_conquer(problem, param1, param2, ...):
 - Sometimes we need to return multiple results (tuple)
 - Sometimes we need global variables to easily update the final result
 
+Leetcode Problems
+- [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+- [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+- [169. Majority Element](https://leetcode.com/problems/majority-element/)
+
 Backtrack Template
 ------------------
 
@@ -73,3 +78,13 @@ def backtrack(path = [], choices):
 - Backtrack is a decision tree, updating the result is actually a preorder and/or postorder recursion
 - Sometimes we don't need to explicitly maintain the choice list, we derive it using other parameters (e.g. index)
 - Sometimes path can be a string instead of an array, and we use `path += 'choice'` and `path = path[:-1]` to make and remove choice
+
+Leetcode Problems
+- [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+- [78. Subsets](https://leetcode.com/problems/subsets/)
+- [46. Permutations](https://leetcode.com/problems/permutations/)
+- [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
+- [77. Combinations](https://leetcode.com/problems/combinations/)
+- [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+- [51. N-Queens](https://leetcode.com/problems/n-queens/)
+- [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)

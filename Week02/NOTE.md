@@ -32,6 +32,20 @@ d.vals()               # Return a new view of the dictionary’s vals.
 d.values()             # Return a new view of the dictionary’s values.
 ```
 
+Useful functions
+```py
+from collections import Counter
+
+cnt = Counter() # A Counter is a dict subclass for counting hashable objects.
+for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
+    cnt[word] += 1
+print(cnt) # Counter({'blue': 3, 'red': 2, 'green': 1})
+```
+
+Leetcode Problems
+- [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/description/)
+- [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+
 Binary Trees
 ------------
 
@@ -146,6 +160,15 @@ def levelorder(root):
             queue.append(node.right)
 ```
 
+LeetCode Problems
+- [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+- [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+- [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/)
+- [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+- [589. N-ary Tree Preorder Traversal](https://leetcode.com/problems/n-ary-tree-preorder-traversal/)
+- [590. N-ary Tree Postorder Traversal](https://leetcode.com/problems/n-ary-tree-postorder-traversal/)
+- [429. N-ary Tree Level Order Traversal](https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
+
 Binary Search Tree (BST)
 
 > A BST is a rooted binary tree whose internal nodes each store a val greater than all the vals in the node's left subtree and less than those in its right subtree.
@@ -158,6 +181,17 @@ Binary Search Tree (BST)
 | Deletion   | O(log(n))       |
 
 BST Operations
+
+BST Template
+```py
+def BST(root, target):
+    if root.val == target:
+        # found it, do something
+    if val < root.val:
+        BST(root.left, val) # find in left tree
+    if val > root.val:
+        BST(root.right, val)  # find in right tree
+```
 
 Search
 ```py
@@ -218,36 +252,37 @@ Delete
 ```
 
 ```py
-def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+def deleteNode(self, root: TreeNode, val: int) -> TreeNode:
     if root is None:
         return None
-    if key < root.val:
-        root.left = self.deleteNode(root.left, key)
-    elif key > root.val:
-        root.right = self.deleteNode(root.right, key)
+    if val < root.val:
+        root.left = self.deleteNode(root.left, val)
+    elif val > root.val:
+        root.right = self.deleteNode(root.right, val)
     else:
-        if root.left is None:
-            # has only right child
-            child = root.right
-            root = None
-            return child
-        elif root.right is None:
-            # has only left child
-            child = root.left
-            root = None
-            return child
+        if root.left is None: # has only right child
+            return root.right
+        if root.right is None: # has only left child
+            return root.left
         # has two children
-        child = self.minChild(root.right)
-        root.val = child.val
-        root.right = self.deleteNode(root.right , child.val)
+        minNode = self.getMin(root.right)
+        root.val = minNode.val
+        root.right = self.deleteNode(root.right, minNode.val)
     return root
 
-def minChild(self, node: TreeNode) -> TreeNode:
-    curr = node
-    while curr.left is not None:
-        curr = curr.left
-    return curr
+def getMin(self, node: TreeNode) -> TreeNode:
+    # left most child is the smallest
+    while node.left is not None:
+        node = node.left
+    return node
 ```
+
+LeetCode Problems
+- [100. Same Tree](https://leetcode.com/problems/same-tree/)
+- [700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
+- [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+- [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+- [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 Heap
 ----
@@ -255,7 +290,7 @@ Heap
 > A heap is a complete binary tree, and is represent by array. The children of the node at index i are at indices 2i + 1 and 2i + 2.
 
 Given element in a heap at position `i`:
-- parent position: `(i-1) >> 1`
+- parent position: `(i-1) >> 1` or `i // 2`
 - left child position: `2*i + 1`
 - right child position: `2*i + 2`
 
