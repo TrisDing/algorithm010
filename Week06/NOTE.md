@@ -1,4 +1,4 @@
-Learning Notes Week 04
+Learning Notes Week 06
 ======================
 
 Dynamic Programming
