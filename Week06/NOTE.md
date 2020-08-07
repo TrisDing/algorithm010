@@ -26,25 +26,21 @@ Top-down
   /       \
 f(1)      f(1)
 ```
+
 Recursion
 ```py
 def fib(N):
-    if N == 0: return 0
-    if N == 1: return 1
+    if N < 2: return N
     return fib(N-1) + fib(N-2)
 ```
+
 Space Optimization (Memo)
 ```py
 memo = {}
 def fib(N):
-    if N == 0: return 0
-    if N == 1: return 1
-
-    if memo.get(N):
-        return memo[N]
-
-    memo[N] = fib(N-1) + fib(N-2)
-
+    if N < 2: return N
+    if N in memo:
+        memo[N] = fib(N-1) + fib(N-2)
     return memo[N]
 ```
 
@@ -54,37 +50,35 @@ f(0) f(1) f(2) f(3) f(4) f(5)
   1    2    3    5    8   13
 --------------------------->
 ```
+
 Dynamic Programming
 ```py
 def fib(N):
-    if N == 0: return 0
-    if N == 1: return 1
-
+    """
+    dp(N) = {
+        N, N < 2
+        dp(N-1) + dp(N-2), N >= 2
+    }
+    """
+    if N < 2: return N
     dp = [0] * (N+1)
     dp[0] = 0
     dp[1] = 1
-
     for i in range(2, N+1):
         dp[i] = dp[i-1] + dp[i-2]
-
-    return dp[N]
+    return dp[-1]
 ```
+
 Space Optimization (Reduce States)
 ```py
 def fib(self):
-    if N == 0: return 0
-    if N == 1: return 1
-
-    dp_i = 0
-    dp_i_1 = 0
-    dp_i_2 = 1
-
+    if N < 2: return N
+    f, f1, f2 = 0, 0, 1
     for i in range(N):
-        dp_i = dp_i_1 + dp_i_2
-        dp_i_2 = dp_i_1
-        dp_i_1 = dp_i
-
-    return dp_i
+        f = f1 + f2
+        f2 = f1
+        f1 = f
+    return f
 ```
 
 DP Framework
@@ -104,6 +98,7 @@ Leetcode Problems
 
 Basics
 - [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
+- [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [120. Triangle](https://leetcode.com/problems/triangle/)
 
 House Robber

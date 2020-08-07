@@ -1,15 +1,6 @@
 """
-300. Longest Increasing Subsequence
-https://leetcode.com/problems/longest-increasing-subsequence/)
-
-516. Longest Palindromic Subsequence
-https://leetcode.com/problems/longest-palindromic-subsequence/
-
 1143. Longest Common Subsequence
 https://leetcode.com/problems/longest-common-subsequence/
-
-1035. Uncrossed Lines
-https://leetcode.com/problems/uncrossed-lines/
 """
 class Solution:
     def longestCommonSubsequence(self, s: str, t: str) -> int:
