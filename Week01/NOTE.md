@@ -48,31 +48,6 @@ a.index(x[, start[, end]]) # index of the first occurrence of x in s
 a.sort(key=None, reverse=False) # Sort the items of the list in place
 ```
 
-String Operations
-```py
-s.strip([chars])     # return a copy of the string with the leading and trailing characters removed.
-s.startswith(prefix) # return True if string starts with the prefix, False otherwise.
-s.endswith(prefix)   # return True if string starts with the prefix, False otherwise.
-s.slipt(delimiter)   # return a list of the words of the string s.
-s.lower()            # return a copy of the string with all the lowercase characters
-s.upper()            # return a copy of the string with all the uppercase characters
-ord(c)               # the unicode code representation of the char
-ord(c) - ord('a')    # the position of the char in 26 letters
-chr(i)               # string representation of the char unicode code
-```
-
-String Constants
-```py
-import string
-
-string.digits          # the string '0123456789'
-string.hexdigits       # the string '0123456789abcdefABCDEF'
-string.octdigits       # the string '01234567'
-string.ascii_lowercase # the uppercase letters 'abcdefghijklmnopqrstuvwxyz'
-string.ascii_letters   # The lowercase letters 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-string.letters         # The concatenation of the ascii_lowercase and ascii_uppercase
-```
-
 Coding Techniques
 ```py
 # List comprehension
