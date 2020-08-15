@@ -39,7 +39,7 @@ Space Optimization (Memo)
 memo = {}
 def fib(N):
     if N < 2: return N
-    if N in memo:
+    if N not in memo:
         memo[N] = fib(N-1) + fib(N-2)
     return memo[N]
 ```
