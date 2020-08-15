@@ -121,6 +121,7 @@ Properties
 - O(1) lookup
 - O(1) update
 
+Leetcode Problems
 - [146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 
 Sorting

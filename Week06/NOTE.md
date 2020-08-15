@@ -86,6 +86,7 @@ DP Framework
 ```py
 # initialize base case
 dp[0][0][...] = base
+
 # status transfer
 for status_1 in all_values_in_status_1：
     for status_2 in all_values_in_status_2:
@@ -100,6 +101,8 @@ Basics
 - [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
 - [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [120. Triangle](https://leetcode.com/problems/triangle/)
+- [322. Coin Change](https://leetcode.com/problems/coin-change/)
+- [518. Coin Change 2](https://leetcode.com/problems/coin-change-2/)
 
 House Robber
 - [198. House Robber](https://leetcode.com/problems/house-robber/)

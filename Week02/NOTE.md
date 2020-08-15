@@ -6,10 +6,10 @@ Hash Table
 
 > A hash table is a data structure used to store vals, optionally, with corresponding values.
 
-- A mapping object maps hashable values to arbitrary objects. Mappings are mutable objects. The only standard mapping type in python is Dictionary.
+- A mapping object maps hashable values to arbitrary objects. Mappings are **mutable** objects. The only standard mapping type in python is `Dictionary`.
 - A dictionary’s vals are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as vals.
 - Dictionaries can be created by placing a comma-separated list of val: value pairs within braces or by the dict() constructor.
-- A set is an unordered collection with no duplicate elements. Curly braces or the set() function can be used to create sets. (empty set must use set())
+- A `set` is an unordered collection with no duplicate elements. Curly braces or the set() function can be used to create sets. (empty set must use set())
 
 | Operation  | Time Complexity |
 | ---------- | :-------------: |
@@ -27,9 +27,9 @@ val in d               # Return True if d has a val val, else False.
 val not in d           # Equivalent to not val in d.
 d.clear()              # Remove all items from the dictionary.
 d.get(val[, default])  # Return the value for val if val is in the dictionary, else default.
-d.items()              # Return a new view of the dictionary’s items ((val, value) pairs).
-d.vals()               # Return a new view of the dictionary’s vals.
+d.keys()               # Return a new view of the dictionary’s keys.
 d.values()             # Return a new view of the dictionary’s values.
+d.items()              # Return a new view of the dictionary’s items ((val, value) pairs).
 ```
 
 Useful functions
@@ -83,7 +83,7 @@ Complete Binary Tree
 > A binary tree in which every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible.
 
 - A complete binary tree has `2^k` nodes at every depth `k < n` and between `2^n` and `2^n+1 - 1` nodes altogether.
-- It can be efficiently implemented as an array, where a node at index `i` has children at indexes `2i` and `2i+1` and a parent at index `i/2`, with 1-based indexing.
+- It can be efficiently implemented as an array, where a node at index `i` has children at indexes `2i` and `2i+1` and a parent at index `i/2`, with 1-based indexing (`2i+1` and `2i+2` for 0-based indexing)
 
 ```
       __A__
@@ -141,9 +141,9 @@ DFS Post-order Traversal:  `left -> right -> root`
 ```py
 def postorder(self, root):
     if root:
-        self.postorder(left)
-        self.postorder(right)
-        self.visit(root)
+        postorder(left)
+        postorder(right)
+        visit(root)
 ```
 
 BFS Level Order Traversal: `top -> bottom, left -> right`
@@ -175,12 +175,10 @@ Binary Search Tree (BST)
 
 | Operation  | Time Complexity |
 | ---------- | :-------------: |
-| Access     | O(log(n))       |
-| Search     | O(log(n))       |
-| Insertion  | O(log(n))       |
-| Deletion   | O(log(n))       |
-
-BST Operations
+| Access     | O(log n)       |
+| Search     | O(log n)       |
+| Insertion  | O(log n)       |
+| Deletion   | O(log n)       |
 
 BST Template
 ```py
@@ -230,44 +228,50 @@ def insert(root, val):
 Delete
 ```
 1) Node to be deleted is leaf: Simply remove from the tree.
-       50                            50
-    /     \         Delete(20)      /   \
-   30      70       --------->    30     70
-  /  \    /  \                     \    /  \
-20   40  60   80                   40  60   80
+
+     50                             50
+   /    \         Delete(20)      /    \
+  30     70       --------->    30     70
+ /  \   /  \                      \   /  \
+20  40 60  80                     40 60  80
 
 2) Node to be deleted has only one child: Copy the child to the node and delete the child.
-        50                           50
-     /     \        Delete(30)      /   \
-    30      70      --------->    40     70
-      \    /  \                         /  \
-      40  60   80                      60   80
+
+     50                             50
+   /    \         Delete(30)      /    \
+  30     70       --------->    40     70
+    \   /  \                          /  \
+    40 60  80                        60  80
 
 3) Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor.
-        50                           60
-     /     \        Delete(50)      /   \
-    40      70      --------->    40    70
-           /  \                           \
-          60   80                          80
+
+     50                             60
+   /    \         Delete(30)      /    \
+  30     70       --------->    40     70
+    \   /  \                             \
+    40 60  80                            80
 ```
 
 ```py
 def deleteNode(self, root: TreeNode, val: int) -> TreeNode:
-    if root is None:
-        return None
+    if root is None: return root
+
     if val < root.val:
         root.left = self.deleteNode(root.left, val)
     elif val > root.val:
         root.right = self.deleteNode(root.right, val)
     else:
-        if root.left is None: # has only right child
+        # has one child
+        if root.left is None: # only right child
             return root.right
-        if root.right is None: # has only left child
+        if root.right is None: # only left child
             return root.left
+
         # has two children
         minNode = self.getMin(root.right)
         root.val = minNode.val
         root.right = self.deleteNode(root.right, minNode.val)
+
     return root
 
 def getMin(self, node: TreeNode) -> TreeNode:
@@ -287,7 +291,7 @@ LeetCode Problems
 Heap
 ----
 
-> A heap is a complete binary tree, and is represent by array. The children of the node at index i are at indices 2i + 1 and 2i + 2.
+> A heap is a complete binary tree, and is represent by array. The children of the node at index i are at indices 2i+1 and 2i+2.
 
 Given element in a heap at position `i`:
 - parent position: `(i-1) >> 1` or `i // 2`
@@ -355,7 +359,7 @@ Graph
 
 Types of graphs:
 - Undirected Graph: nodes are connected by edges that are all bidirectional.
-- Directed: nodes are connected by directed edges – they only go in one direction.
+- Directed Graph: nodes are connected by directed edges – they only go in one direction.
 
 Graph Adjacency List Representation
 - The size of the array is equal to the number of nodes.

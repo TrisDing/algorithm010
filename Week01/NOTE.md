@@ -6,7 +6,7 @@ Array
 
 > Array is a contiguous block of memory. It is usually used to represent sequences.
 
-- Arrays are lists, lists are mutable sequences, tuples are immutable sequences
+- Arrays are lists, lists are **mutable** sequences, tuples are **immutable** sequences
 - Lists are dynamically-resized, there is no upper bound
 - Values can be deleted and inserted at arbitrary locations
 
@@ -73,11 +73,11 @@ windows = [nums[i:i+k] for i in range(n-k+1)]
 print(windows) # [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]]
 
 # Rotate array by k times (right shift)
-nums = [1,2,3,4,5,6,7]
+nums, k = [1,2,3,4,5,6,7], 3
 n = len(nums)
 for i in range(n):
     res[(i + k) % n] = nums[i]
-print(res)  # [5,6,7,1,2,3,4]
+print(res) # [5,6,7,1,2,3,4]
 
 # Useful functions
 map(lambda x: x * x, [1, 2, 3, 4, 5]) # [1, 4, 9, 16, 25]
@@ -108,13 +108,13 @@ Linked Lists
 
 > A list implements an ordered collection of values, which may include repetitions.
 
-Singly linked list: `L -> 2 -> 3 -> 5 -> 4 -> EOL`
+Singly linked list: `2 -> 3 -> 5 -> 4 -> x`
 - 2 is linked list head
 - 4 is linked list tail
 - 2's next is 3, 3's next is 5 and 5's next is 4, and 4's next is None
 - L sometimes is used as a "dummy" head
 
-Doubly linked list: `L -> x <- 2 <-> 3 <-> 5 <-> 4 -> x`
+Doubly linked list: `x <- 2 <-> 3 <-> 5 <-> 4 -> x`
 - 2's prev is None, 2's next is 3
 - 3's prev is 2   , 3's next is 5
 - 4's prev is 3   , 5's next is 4
@@ -264,9 +264,9 @@ def slidingWindow(s, t):
             if window[c] == target[c]:
                 valid += 1
 
-        while # when we found a valid window
+        while ... # when we found a valid window
             if valid == len(target):
-                # check the answer or update the result
+                ... # check the answer or update the result
 
             # d is the element to be removed from the window
             d = s[left]
@@ -283,6 +283,7 @@ Mono stack
 ```py
 n = len(nums)
 stack = []
+
 leftMax = [-1] * n
 for i in range(n): # push into stack
     while stack and stack[-1] <= nums[i]: # compare with stack top
@@ -353,9 +354,60 @@ Leetcode Problems
 - [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 - [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
 - [42. Trapping Rain Water](https://leetcode.com/problems/next-greater-element-ii/)
--
 
 Skip List
 ---------
 
-[TODO]
+> The skip list is a probabilisitc data structure that is built upon the general idea of a linked list. The skip list uses probability to build subsequent layers of linked lists upon an original linked list. Each additional layer of links contains fewer elements, but no new elements.
+
+```
+   1                               10
+ o---> o---------------------------------------------------------> o    Top level
+   1           3              2                    5
+ o---> o---------------> o---------> o---------------------------> o    Level 3
+   1        2        1        2              3              2
+ o---> o---------> o---> o---------> o---------------> o---------> o    Level 2
+   1     1     1     1     1     1     1     1     1     1     1
+ o---> o---> o---> o---> o---> o---> o---> o---> o---> o---> o---> o    Bottom level
+Head  1st   2nd   3rd   4th   5th   6th   7th   8th   9th   10th  NIL
+      Node  Node  Node  Node  Node  Node  Node  Node  Node  Node
+```
+
+| Operation  | Time Complexity |
+| ---------- | :-------------: |
+| Access     | O(log n)        |
+| Search     | O(log n)        |
+| Insertion  | O(log n)        |
+| Deletion   | O(log n)        |
+
+```py
+def search(key):
+    p = topLeftNode()
+    while p.below:            # Scan down
+        p = p.below
+        while key >= p.next:  # Scan forward
+            p = p.next
+    return p
+
+def insert(key):
+    p, q = search(key), None
+    i = 1
+    while CoinFlip() != 'Tails':
+        i = i + 1                   # Height of tower for new element
+        if i >= h:
+            h = h + 1
+            createNewLevel()        # Creates new linked list level
+        while p.above is None:
+            p = p.prev              # Scan backwards until you can go up
+        p = p.above
+        q = insertAfter(key, p)     # Insert our key after position p
+    n = n + 1
+    return q
+
+def delete(key):
+    # Search for all positions p_0, ..., p_i where key exists
+    if none are found:
+        return
+    # Delete all positions p_0, ..., p_i
+    # Remove all empty layers of skip list
+```

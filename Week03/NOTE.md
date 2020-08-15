@@ -61,7 +61,7 @@ Backtrack Template
 result = []
 def backtrack(path = [], choices):
     if end condition:
-        result.add(path[:]) # have to make a new copy
+        result.add(path[:]) # param pass by reference
         return
 
     for choice in choices:
@@ -75,7 +75,7 @@ def backtrack(path = [], choices):
 ```
 
 - Time complexity for backtrack algorithm is at least O(N!)
-- Backtrack is a decision tree, updating the result is actually a preorder and/or postorder recursion
+- Backtrack is a decision tree, updating the result is actually a preorder and/or postorder recursion (DFS)
 - Sometimes we don't need to explicitly maintain the choice list, we derive it using other parameters (e.g. index)
 - Sometimes path can be a string instead of an array, and we use `path += 'choice'` and `path = path[:-1]` to make and remove choice
 

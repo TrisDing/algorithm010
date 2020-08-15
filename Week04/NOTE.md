@@ -8,7 +8,7 @@ DFS Template
 visited = set()
 
 def dfs(node):
-    # terminator
+    # terminator (base case)
     if not node:
         return
 
@@ -23,10 +23,8 @@ def dfs(node):
     visited.add(node)
 
     # process children (drill down)
-    if node.children:
-        for child in node.children:
-            if child not in visited:
-                dfs(child, visited)
+    for child in node.children:
+        dfs(child, visited)
 ```
 
 DFS Application
@@ -60,7 +58,9 @@ def island(self, grid: List[List[int]]):
         return 0 <= r < m and 0 <= c < n
 ```
 
-Backtrack (see Week03 NOTE)
+Backtrack
+
+See [Week03 NOTE](../Week03/NOTE.md).
 
 Leetcode Problems
 - [200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
@@ -80,15 +80,20 @@ def bfs(root):
     while queue:
         # get current node from queue
         node = queue.popleft()
+
+        # already visited
+        if node in visited:
+            continue
+
         # process current node
         process(node.val)
+
         # add to visited
         visited.add(node)
+
         # process children
-        if node.children:
-            for child in node.children:
-                if child not in visited:
-                    queue.append(child)
+        for child in node.children:
+            queue.append(child)
 ```
 
 BFS Application
@@ -162,7 +167,16 @@ Leetcode Problems
 
 Greedy Algorithm
 ----------------
-[TODO]
+
+> A greedy algorithm is any algorithm that follows the problem-solving heuristic of making the locally optimal choice at each stage.
+
+Leetcode Problems
+- [860. Lemonade Change](https://leetcode.com/problems/lemonade-change/)
+- [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/)
+- [874. Walking Robot Simulation](https://leetcode.com/problems/walking-robot-simulation)
+- [322. Coin Change](https://leetcode.com/problems/coin-change/)
+- [55. Jump Game](https://leetcode.com/problems/jump-game/)
+- [45. Jump Game II](https://leetcode.com/problems/jump-game-ii/)
 
 Binary Search
 -------------
