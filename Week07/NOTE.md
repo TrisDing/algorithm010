@@ -219,8 +219,39 @@ Red-Black Tree
 > In a red–black tree, each node stores an extra bit representing color, used to ensure that the tree remains approximately balanced during insertions and deletions.
 
 Properties
-- Each node is either red or black.
-- The root is black. This rule is sometimes omitted. Since the root can always be changed from red to black, but not necessarily vice versa, this rule has little effect on analysis.
-- All leaves (NIL) are black.
-- If a node is red, then both its children are black.
-- Every path from a given node to any of its descendant NIL nodes goes through the same number of black nodes.
+1. Every node is either red or black.
+2. The root is black.
+3. All leaves (NIL) are black.
+4. Red nodes have only black children (no two red nodes are connected)
+5. Every path from a given node to any of its descendant NIL nodes goes through the same number of black nodes.
+
+Operations
+1. Change Color
+2. Rotate Left
+3. Rotate Right
+
+```
+     G     G - Grand Parent
+   /   \
+  P     U  P - Parent, U - Uncle
+ / \
+S   N      S - Sibling, N - Current
+```
+
+RED-BLACK repair procedure Operations:
+- All newly inserted nodes are considered as **RED** by default
+- Case 1: current node N is root
+    - set current node N to **BLACK**
+- Case 2: current node N's parent node P is **BLACK**
+    - Do Nothing since tree is still valid
+- Case 3: current node N's parent node P is **RED** and it's Uncle node U is also **RED**
+    - set parent node P to **BLACK**
+    - set Uncle node U to **BLACK**
+    - set Grand parent node G to **RED**
+    - rerun on the RED-BLACK repair procedure G
+- Case 4: current node N's parent node P is **RED** but it's uncle node U is **BLACK**
+    - Current node N is right sub-tree, rotate left parent node P
+    - current node N is left sub-tree
+        - Set parent node P to **BLACK**
+        - Set grand parent node G to **RED**
+        - Rotate right on grand parent node G
