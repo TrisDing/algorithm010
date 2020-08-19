@@ -66,19 +66,6 @@ vec = [[1,2,3], [4,5,6], [7,8,9]]
 # String formatter
 'Hello {name}'.format(name='World')
 
-# Get sliding windows of size k in an array of nums
-nums, k = [1,2,3,4,5,6], 3
-n = len(nums)
-windows = [nums[i:i+k] for i in range(n-k+1)]
-print(windows) # [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]]
-
-# Rotate array by k times (right shift)
-nums, k = [1,2,3,4,5,6,7], 3
-n = len(nums)
-for i in range(n):
-    res[(i + k) % n] = nums[i]
-print(res) # [5,6,7,1,2,3,4]
-
 # Useful functions
 map(lambda x: x * x, [1, 2, 3, 4, 5]) # [1, 4, 9, 16, 25]
 map(lambda x, y: x + y, [1, 2, 3], [4, 5, 6]) # [5, 7, 9]
@@ -89,18 +76,54 @@ sum([1, 2, 3, 4, 5]) # 15
 functools.reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) # calculates ((((1+2)+3)+4)+5) = 15
 ```
 
+```py
+# total combinations of two numbers (pairs) in an array (brute force)
+nums = [1,2,3,4]
+n = len(nums)
+for i in range(n-1):
+    for j in range(i+1, n):
+        print((nums[i], nums[j])) # [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
+
+# traverse backwards
+nums = [1,2,3,4,5]
+n = len(nums)
+for i in range(n-1, -1, -1):
+    print(nums[i]) # [5,4,3,2,1]
+
+# Two Pointers
+nums = [1,2,3,4,5,6,7,8,9]
+n = len(nums)
+i, j = 0, n-1
+while i <= j:
+    print(nums[i], nums[j]) # [(1, 9), (2, 8), (3, 7), (4, 6), (5, 5)]
+    while i <= j and nums[i+1] == nums[i]: i += 1 # skip duplicates
+    while i <= j and nums[j-1] == nums[j]: j -= 1 # skip duplicates
+    i += 1
+    j -= 1
+
+# Get sliding windows of size k in an array of nums
+nums, k = [1,2,3,4,5,6], 3
+n = len(nums)
+windows = [nums[i:i+k] for i in range(n-k+1)]
+print(windows) # [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]]
+
+# Rotate array by k times (right shift)
+nums, k = [1,2,3,4,5,6,7], 3
+n = len(nums)
+for i in range(n):
+    res[(i+k)%n] = nums[i]
+print(res) # [5,6,7,1,2,3,4]
+```
+
 Leetcode Problems
 - [1. Two Sum](https://leetcode.com/problems/two-sum/)
-- [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 - [66. Plus One](https://leetcode.com/problems/plus-one/)
 - [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 - [26. Remove Duplicates from Sorted Array ](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 - [88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
-- [167. Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
-- [15. 3Sum](https://leetcode.com/problems/3sum/)
-- [344. Reverse String](https://leetcode.com/problems/reverse-string/)
 - [189. Rotate Array](https://leetcode.com/problems/rotate-array/)
-- [704. Binary Search](https://leetcode.com/problems/binary-search/)
+- [344. Reverse String](https://leetcode.com/problems/reverse-string/)
+- [15. 3Sum](https://leetcode.com/problems/3sum/)
 - [11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
 
 Linked Lists

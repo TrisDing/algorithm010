@@ -43,6 +43,7 @@ print(cnt) # Counter({'blue': 3, 'red': 2, 'green': 1})
 ```
 
 Leetcode Problems
+- [1. Two Sum](https://leetcode.com/problems/two-sum/)
 - [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/description/)
 - [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 
