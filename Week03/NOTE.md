@@ -50,6 +50,8 @@ def divide_conquer(problem, param1, param2, ...):
 - Sometimes we need global variables to easily update the final result
 
 Leetcode Problems
+- [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+- [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
 - [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 - [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 - [169. Majority Element](https://leetcode.com/problems/majority-element/)
