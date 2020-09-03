@@ -207,7 +207,7 @@ Linked List Recursion
 ```py
 def traverse(head):
     # base case
-    if head.next:
+    if not head:
         return head
     # do something before (pre-order)
     node = traverse(head.next)
@@ -263,86 +263,66 @@ queue[0]             # peek left side of the deque
 queue[-1]            # peek right side of the deque
 ```
 
-Sliding Window Template
-```py
-from collections import Counter
-
-def slidingWindow(s, t):
-    window = Counter()
-    target = Counter(t)
-
-    len_s, len_t = len(s), len(t)
-    left = right = 0
-    valid = 0
-
-    while right < len_s:
-        # c is the element to be inserted into the window
-        c = s[right]
-        # expand the current window
-        right += 1
-        # If c is our target, we are 1 step closer to the answer
-        if c in target:
-            window[c] += 1
-            if window[c] == target[c]:
-                valid += 1
-
-        while ... # when we found a valid window
-            if valid == len(target):
-                ... # check the answer or update the result
-
-            # d is the element to be removed from the window
-            d = s[left]
-            # shrink the current window
-            left += 1
-            # if d is our target, shrinking might cause the window to be invalid
-            if d in target:
-                if window[d] == target[d]:
-                    valid -= 1
-                window[d] -= 1
-```
-
 Mono stack
 ```py
 n = len(nums)
 stack = []
 
-leftMax = [-1] * n
+prevGreaterElement = [-1] * n
 for i in range(n): # push into stack
     while stack and stack[-1] <= nums[i]: # compare with stack top
-        # pop out numbers smaller than me
-        stack.pop()
-        # now the top is the first element bigger than me
-        leftMax[i] = stack[-1] if stack else -1
+        stack.pop() # pop out numbers smaller than me
+    # now the top is the first element larger than me
+    prevGreaterElement[i] = stack[-1] if stack else -1
     # push myself in stack for the next round
     stack.append(nums[i])
-return leftMax
+print(prevGreaterElement)
 
 # Variation 1: push to stack backwards to get the rightMax
-rightMax = [-1] * n
+nextGreaterElement = [-1] * n
 for i in range(n-1, -1, -1):
-    ...
+    while stack and stack[-1] <= nums[i]:
+        stack.pop()
+    nextGreaterElement[i] = stack[-1] if stack else -1
+    stack.append(nums[i])
+print(nextGreaterElement)
 
-# Variation 2: find min rather than max
-leftMin = [-1] * n
+# Variation 2: find min rather than max (change the compare part)
+prevSmallerElement = [-1] * n
 for i in range(n):
-    while stack and nums[i] <= stack[-1]:
-        ...
+    while stack and stack[-1] > nums[i]:
+        stack.pop()
+    prevSmallerElement[i] = stack[-1] if stack else -1
+    stack.append(nums[i])
+print(prevSmallerElement)
 
 # Variation 3: push index to stack instead of numbers
-while stack and nums[stack[-1]] <= nums[i]:
-    stack.pop()
-...
-stack.append(i)
+prevGreaterIndex = [-1] * n
+for i in range(n):
+    while stack and nums[stack[-1]] <= nums[i]:
+        stack.pop()
+    prevGreaterIndex[i] = stack[-1] if stack else -1
+    stack.append(i)
+print(prevGreaterIndex)
 
-# Variation 4: find leftMax and rightMax in one pass
+# Mono Increasing Stack
+for i in range(n):
+    while stack and nums[stack[-1]] > nums[i]:
+        curr = stack.pop()
+        if not stack:
+            ...
+        left, right = stack[-1], i
+        print(left, curr, right)
+    stack.append(i)
+
+# Mono Decreasing Stack
 for i in range(n):
     while stack and nums[stack[-1]] < nums[i]:
-        currIndex = stack.pop()
+        curr = stack.pop()
         if not stack:
-            break
-        leftMax = stack[-1]
-        rightMax = i
-        print(leftMax, currIndex, rightMax)
+            ...
+        left, right = stack[-1], i
+        print(left, curr, right)
     stack.append(i)
 ```
 
@@ -369,14 +349,11 @@ Leetcode Problems
 - [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
 - [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/)
 - [155. Min Stack](https://leetcode.com/problems/min-stack/)
+- [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+- [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/)
+- [42. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 - [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 - [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
-- [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
-- [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)
-- [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)
-- [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-- [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
-- [42. Trapping Rain Water](https://leetcode.com/problems/next-greater-element-ii/)
 
 Skip List
 ---------
