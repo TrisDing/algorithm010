@@ -243,13 +243,14 @@ Delete
     \   /  \                          /  \
     40 60  80                        60  80
 
-3) Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor.
+3) Node to be deleted has two children: Find inorder successor of the node.
+   Copy contents of the inorder successor to the node and delete the inorder successor.
 
      50                             60
-   /    \         Delete(30)      /    \
-  30     70       --------->    40     70
-    \   /  \                             \
-    40 60  80                            80
+   /    \         Delete(50)      /    \
+  40     70       --------->    40     70
+        /  \                             \
+       60  80                            80
 ```
 
 ```py
