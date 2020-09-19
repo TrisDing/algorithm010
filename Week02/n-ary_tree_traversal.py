@@ -22,8 +22,7 @@ class Solution:
         Solution #1: Recursively
         """
         def traverse(root):
-            if not root:
-                return
+            if not root: return
             res.append(root.val)
             if root.children is not None:
                 for child in root.children:
@@ -37,18 +36,16 @@ class Solution:
         """
         Solution #2: Iteratively
         """
-        if not root:
-            return []
+        if not root: return []
         res = []
         stack = [root]
         while stack:
-            root = stack.pop()
-            if root.children is not None:
-                # from right to left append child
-                for child in root.children[::-1]:
+            node = stack.pop()
+            if not node: continue
+            res.append(node.val)
+            if node.children:
+                for child in node.children[::-1]:
                     stack.append(child)
-            if root is not None:
-                res.append(root.val)
         return res
 
     def postorder1(self, root: TreeNode) -> List[int]:

@@ -34,6 +34,21 @@ class Solution:
         """
         Solution #2: Iteratively
         """
+        if not root: return []
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node is not None:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+        return res
+
+    def preorderTraversal3(self, root: BinaryTreeNode) -> List[int]:
+        """
+        Solution #3: White/Grey Tagging
+        """
         WHITE, GREY = 0, 1
         res = []
         stack = [(WHITE, root)]
@@ -63,9 +78,27 @@ class Solution:
         traverse(root)
         return res
 
-    def inorderTraversal2(self, root: BinaryTreeNode) -> List[int]:
+    def inorderTraversal2(self, root: TreeNode) -> List[int]:
         """
         Solution #2: Iteratively
+        """
+        if not root: return []
+        res = []
+        stack = []
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            if not stack:
+                return res
+            node = stack.pop()
+            res.append(node.val)
+            root = node.right
+        return res
+
+    def inorderTraversal3(self, root: BinaryTreeNode) -> List[int]:
+        """
+        Solution #3: White/Grey Tagging
         """
         WHITE, GREY = 0, 1
         res = []
@@ -96,9 +129,24 @@ class Solution:
         traverse(root)
         return res
 
-    def postorderTraversal2(self, root: BinaryTreeNode) -> List[int]:
+    def postorderTraversal2(self, root: TreeNode) -> List[int]:
         """
-        Solution #1: Iteratively
+        Solution #2: Iteratively
+        """
+        if not root: return root
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node is not None:
+                res.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+        return res[::-1]
+
+    def postorderTraversal3(self, root: BinaryTreeNode) -> List[int]:
+        """
+        Solution #3: White/Grey Tagging
         """
         WHITE, GREY = 0, 1
         res = []

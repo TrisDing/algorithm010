@@ -7,8 +7,7 @@ Hash Table
 > A hash table is a data structure used to store vals, optionally, with corresponding values.
 
 - A mapping object maps hashable values to arbitrary objects. Mappings are **mutable** objects. The only standard mapping type in python is `Dictionary`.
-- A dictionary’s vals are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as vals.
-- Dictionaries can be created by placing a comma-separated list of val: value pairs within braces or by the dict() constructor.
+- A `dict` vals are almost arbitrary values. Values that are not hashable (like lists, dictionaries or other mutable types) may not be used as vals.
 - A `set` is an unordered collection with no duplicate elements. Curly braces or the set() function can be used to create sets. (empty set must use set())
 
 | Operation  | Time Complexity |
